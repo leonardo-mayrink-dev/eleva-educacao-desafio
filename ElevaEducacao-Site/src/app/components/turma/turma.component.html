@@ -1,0 +1,56 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Gerenciamento de Turmas</li>
+  </ol>
+</nav>
+<div class="container">
+  <div class="card list-car">
+    <h5 class="card-header">Lista de Turmas</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nome da Turma</th>
+              <th scope="col">Nome da Escola</th>              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let turma of turmas">
+              <td>{{turma.nomeTurma}}</td>
+              <td>{{turma.nomeEscola}}</td>               
+              <!-- <td>{{escola.price | currency}}</td> -->
+              <td>
+                <button type="button" class="btn btn-warning btn-sm" (click)="editTurma(turma)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteTurma(turma)">Deletar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="card add-car">
+      <h5 class="card-header">Adicionar/Atualizar Turma</h5>
+      <div class="card-body">
+          <form id="add-form" (ngSubmit)="f.form.valid && saveTurma(f)" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label for="nomeTurma">Nome da turma</label>
+                <input type="text" [(ngModel)]="turma.nomeTurma" id="nomeTurma" name="nomeTurma" #model="ngModel" required class="form-control"  placeholder="Digite o nome da escola">
+                <!-- <div *ngIf="f.submitted && nomeTurma.invalid" class="invalid-feedback">
+                    <div *ngIf="nomeTurma.errors.required">Nome da escola é obrigatório</div>
+                </div> -->
+            </div>
+            <div class="form-group">
+              <label for="nomeEscola">Nome da Escola</label>
+              <input type="text" [(ngModel)]="turma.nomeEscola" id="nomeEscola" name="nomeEscola" #model="ngModel" required class="form-control"  placeholder="Digite o nome da escola">
+              <!-- <div *ngIf="f.submitted && nomeEscola.invalid" class="invalid-feedback">
+                  <div *ngIf="nomeEscola.errors.required">Nome da escola é obrigatório</div>
+              </div> -->
+          </div>
+           
+            <button type="submit" class="btn btn-primary btn-add-car">Salvar</button>
+            <button type="reset" class="btn btn-secondary btn-add-car" (click)="cleanForm(f)">Cancelar</button>
+          </form>
+      </div>
+    </div>
+</div>

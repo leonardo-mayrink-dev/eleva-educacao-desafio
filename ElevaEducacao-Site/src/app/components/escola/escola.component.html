@@ -1,0 +1,74 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Gerenciamento de escolas</li>
+  </ol>
+</nav>
+<div class="container">
+  <div class="card list-car">
+    <h5 class="card-header">Lista de escolas</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nome da Escola</th>
+              <th scope="col">CNPJ</th>
+              <th scope="col">Telefone</th>
+              <th scope="col">Endereço</th>              
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let escola of escolas">
+              <td>{{escola.nomeEscola}}</td>
+              <td>{{escola.cnpj}}</td>
+              <td>{{escola.telefone}}</td>
+              <td>{{escola.endereco}}</td>
+              <!-- <td>{{escola.price | currency}}</td> -->
+              <td>
+                <button type="button" class="btn btn-warning btn-sm" (click)="editEscola(escola)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteEscola(escola)">Deletar</button>                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="card add-car">
+      <h5 class="card-header">Adicionar/Atualizar escola</h5>
+      <div class="card-body">
+          <form id="add-form" (ngSubmit)="f.form.valid && saveEscola(f)" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label for="nomeEscola">Nome da Escola</label>
+                <input type="text" [(ngModel)]="escola.nomeEscola" id="nomeEscola" name="nomeEscola" #model="ngModel" required class="form-control" placeholder="Digite o nome da escola">
+                <div *ngIf="f.submitted && f.nomeEscola.invalid" class="invalid-feedback">
+                    <div *ngIf="f.nomeEscola.errors.required">Nome da escola é obrigatório</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cnpj">CNPJ</label>
+                <input type="text" [(ngModel)]="escola.cnpj" id="cnpj" name="cnpj" #color="ngModel" required class="form-control"  placeholder="Digite o cnpj">
+                <div *ngIf="f.submitted && f.cnpj.invalid" class="invalid-feedback">
+                    <div *ngIf="f.cnpj.errors.required">CNPJ é obrigatório</div>
+                </div>
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input type="text" [(ngModel)]="escola.telefone" id="telefone" name="telefone" #color="ngModel" required class="form-control"  placeholder="Digite o telefone">
+              <div *ngIf="f.submitted && f.telefone.invalid" class="invalid-feedback">
+                  <div *ngIf="f.telefone.errors.required">Telefone é obrigatório</div>
+              </div>
+          </div>
+            <div class="form-group">
+              <label for="endereco">Endereço</label>
+              <input type="text" [(ngModel)]="escola.endereco" id="endereco" name="endereco" #color="ngModel" required class="form-control"  placeholder="Digite o endereço">
+              <div *ngIf="f.submitted && f.endereco.invalid" class="invalid-feedback">
+                  <div *ngIf="f.endereco.errors.required">Endereço é obrigatório</div>
+              </div>
+          </div>
+            <button type="submit" class="btn btn-primary btn-add-car">Salvar</button>
+            <button type="reset" class="btn btn-secondary btn-add-car" (click)="cleanForm(f)">Cancelar</button>
+          </form>
+      </div>
+    </div>
+</div>
